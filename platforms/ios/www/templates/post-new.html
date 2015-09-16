@@ -1,0 +1,28 @@
+<ion-view title="NEW POST">
+<ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+</ion-nav-buttons>
+<ion-header-bar class="bar bar-header bar-assertive">
+<h1 class="title">NEW POST</h1>
+<!-- <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button> -->
+</ion-header-bar>
+<ion-content class="has-header">
+    <form ng-submit="onSubmit()">
+      <div class="list">
+      <leaflet center="london" tiles="tiles" markers="markers" height="200px" width="100%"></leaflet>
+        <input type="hidden" ng-model="markers.m2.lat">
+        <input type="hidden" ng-model="markers.m2.lng">
+        <label class="item item-input">
+          <span class="input-label">Title</span>
+          <input type="text" ng-model="newPost.title">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Content</span>
+          <textarea rows="10" ng-model="newPost.content"></textarea>
+        </label>
+        <label class="item">
+          <button class="button button-positive button-full" type="submit">Post</button>
+        </label>
+        
+      </div>
+</ion-view>

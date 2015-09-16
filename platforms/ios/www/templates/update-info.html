@@ -1,0 +1,18 @@
+<ion-view title="UPDATE INFO"> 
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <form ng-submit="updateInfo()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email" ng-model="updateData.email" name="email" ng-pattern="/([A-Za-z0-9])+@([A-Za-z0-9])+.harvard.edu/g">
+        </label>
+        <label class="item">
+          <button class="button button-full button-calm" type="submit">Update Info</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

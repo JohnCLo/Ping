@@ -1,0 +1,44 @@
+<div class="modal">
+  <ion-header-bar class="bar-assertive">
+      <h1 class="title">UPDATE CREDIT CARD</h1>
+      <button class="button button-clear button-primary" ng-click="closeUpdateCredit()">Cancel</button>
+  </ion-header-bar>
+  
+  <ion-content ng-class="{'has-fiy': showFIY}">
+    <form novalidate name="updateCCForm" stripe-form="stripeCallback" ng-submit="onSubmit()" data-abide>
+      <div class="list">
+
+        <label class="item item-input">
+          <span class="input-label">Card Number</span>
+            <input type="tel" ng-model="number" placeholder="XXXX-XXXX-XXXX-XXXX" payments-format="card" payments-validate="card" name="number" required/>
+          </span>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="!updateCCForm.number.$error.required && updateCCForm.number.$invalid">
+          <span class="input-label"></span>
+            <small class="error">Please enter a valid card number</small>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Expiration</span>
+            <input type="tel" ng-model="expiry" placeholder="MM / YYYY" payments-format="expiry" payments-validate="expiry" name="expiry" required/>
+          </span>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="!updateCCForm.expiry.$error.required && updateCCForm.expiry.$invalid">
+          <span class="input-label"></span>
+            <small class="error">Please enter a valid expiration date</small>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">CVC</span>
+            <input type="tel" ng-model="cvc" placeholder="CVC" payments-format="cvc" payments-validate="cvc" name="cvc" size="3" required/>
+          </span>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="!updateCCForm.cvc.$error.required && updateCCForm.cvc.$invalid">
+          <span class="input-label"></span>
+            <small>Please enter a valid CVC</small>
+        </label>
+
+      <label class="item">
+        <button class="button button-block button-assertive" type="submit" ng-disabled="updateCCForm.$invalid">Update</button> 
+      </label>
+    </form>
+  </ion-content>
+</div>

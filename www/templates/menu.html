@@ -1,0 +1,49 @@
+<ion-side-menus>
+
+  <ion-pane ion-side-menu-content>
+    <ion-nav-bar class="bar-light nav-title-slide-ios7">
+      <ion-nav-back-button class="button-clear" ng-click="goBack()"><i class="icon ion-ios7-arrow-back"></i></ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-pane>
+
+  <ion-side-menu side="left">
+    <ion-content>
+      <ion-list>
+        <ion-item ng-show="user">
+          <div class="avatar" style="background-image: url('{{user.avatar}}')"></div>
+          <div class="center"><br/>
+            {{user.name}}
+          </div>
+        </ion-item>
+        <ion-item ng-hide="user">
+          <div class="avatar" style="background-image: url('pics/prontoLogo.png')"></div>
+          <div class="center"><br/>
+            Guest
+          </div>
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/ping/post-new" ng-show="user">
+          Post
+        </ion-item>
+        <ion-item nav-clear menu-close ng-click="signUp()" ng-hide="user">
+          Sign Up
+        </ion-item>
+        <ion-item nav-clear menu-close ng-click="login()" ng-hide="user">
+          Login
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/ping/map">
+          Explore
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/ping/about-us">
+          About
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/ping/update-info" ng-show="user">
+          Settings
+        </ion-item>
+        <ion-item nav-clear menu-close ng-click="logout()" ng-show="user">
+          Logout
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

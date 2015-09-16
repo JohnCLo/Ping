@@ -1,0 +1,48 @@
+<ion-view title="CART">
+<ion-header-bar class="bar bar-header bar-assertive">
+<h1 class="title">CART</h1>
+<!-- <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button> -->
+</ion-header-bar>
+<ion-content class="has-header">
+
+<!-- empty cart message -->
+<div class="center" ng-hide="cart.getTotalCount() > 0" >
+  <br/><h3>Your Cart is empty.</h3><br/>
+</div>
+
+<div class="row row-center" ng-repeat="item in cart.items | orderBy:'name'">
+    <div class="col col-40"><h5>{{item.name}}</h5></div>
+    <div class="col col-15 number" ng-model="item.quantity" ng-change="cart.saveItems()"><h5>{{item.quantity}}</h5></div>
+    <div class="col col-25">
+        <button class="button button-small button-assertive" ng-disabled="item.quantity >= 1000" ng-click="addItemWithLimit(item.sku, item.name, item.price)"><i class="icon ion-plus"></i></button>
+        <button class="button button-small button-assertive" ng-disabled="item.quantity < 1" ng-click="cart.addItem(item.sku, item.name, item.price, -1)"><i class="icon ion-minus"></i></button>
+    </div>
+    <div class="col col-20 number"><h5>{{item.price * item.quantity | currency}}</h5></div>
+</div>
+<div class="row row-center">
+    <div class="col col-40"><h5>Delivery</h5></div>
+    <div class="col col-20 col-offset-40 number"><h5>{{ cart.getDeliveryCharge() | currency}}</h5></div>
+</div>
+<div class="center" ng-hide="cart.getTotalCount() < 1" >
+  <h4>Total: {{cart.getTotalPriceWithDelivery() | currency}}</h4>
+</div>
+
+<button 
+    class="button button-full button-clear" 
+    ng-click="cart.clearItems(); closeFooter()" 
+    ng-disabled="cart.getTotalCount() < 1" >
+    <i class="icon-trash icon-white" /> Clear Cart
+</button>
+
+<label class="item">
+    <button 
+        class="button button-full button-assertive" 
+        ng-click="attemptCheckout()" 
+        ng-disabled="cart.getTotalCount() < 1">
+        <i class="icon-ok icon-white" /> Checkout
+    </button>
+</label>
+
+<form class="form-stripe"></form>  
+</ion-content>
+</ion-view>

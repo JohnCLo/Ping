@@ -1,0 +1,45 @@
+<div class="modal">
+  <ion-header-bar class="bar-assertive">
+      <h1 class="title">CHECKOUT</h1>
+      <button class="button button-clear button-primary" ng-click="closeCheckoutExisting()">Cancel</button>
+  </ion-header-bar>
+  
+  <ion-content ng-class="{'has-fiy': showFIY}">
+    <!-- <form novalidate name="checkoutForm" ng-submit="onSubmitExisting()" data-abide> -->
+    <form>
+      <div class="list">
+        <label class="item item-input item-select">
+          <span class="input-label">Delivery Location</span>
+          <div class="row" style="padding: 10px">
+            <div class="col col-offset-10 col-90">
+            <select name="location" ng-model="paymentData.location" required>
+              <option value="">Select a Location</option>
+              <option value="quad">Quad</option>
+            </select>
+            </div>
+          </div>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="checkoutForm.location.$error.required">
+          <span class="input-label"></span>
+          <small class="error">Please select your location</small>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Phone Number</span>
+            <input type="tel" ng-model="paymentData.phoneNumber" placeholder="XXX-XXX-XXXX" name="phone" ng-pattern="/(\d{3}-\d{3}-\d{4}|\d{10})/g" required/>
+          </span>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="checkoutForm.phone.$error.required || checkoutForm.phone.$invalid">
+          <span class="input-label"></span>
+          <small class="error">Please enter your phone number</small>
+        </label>
+
+        <button ng-click="updateCredit()" class="button button-clear button-assertive button-full">Update Credit Card</button>
+
+      <label class="item">
+        <button class="button button-block button-assertive" type="submit" ng-disabled="checkoutForm.$invalid">Pay {{cart.getTotalPriceWithDelivery() | currency }}</button> 
+      </label>
+    </div>
+    </form>
+  </ion-content>
+</div>

@@ -1,0 +1,48 @@
+<ion-view title="RESTAURANTS"> 
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+<!--     <div class="bar bar-subheader item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input id="searchKey" type="search" placeholder="Search" ng-model="searchKey" autocorrect="off" >
+            <button class="button button-clear" ng-click="clearSearch()">X</button>
+        </label>
+        <button class="button button-clear" ng-click="search()">Search</button>
+    </div> -->
+
+    <ion-content class="has-header">
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="refreshRestaurants()">
+        </ion-refresher>
+        <div ng-hide="restaurants.length" style="padding-top:20%;">
+            <div class="row">
+              <div class="col col-50 col-offset-25 center">
+                <img ng-src="pics/wifi.png"/>
+                <p style="color:#a4a4a4">Something is wrong with the connection. Pull down to refresh.</p>
+              </div>
+            </div>
+        </div>
+        <ion-list>
+            <ion-item 
+                ng-repeat="restaurant in restaurants | showIfOpen" 
+                type="item-text-wrap" 
+                ng-class="restaurant.closed ? 'item item-thumbnail-left item-stable' : 'item item-thumbnail-left'"
+                href="{{restaurant.url}}"
+                >
+                    <img ng-src="pics/{{restaurant.pic}}" fallback-src="pics/restaurantFillerIcon.png"/>
+                    {{restaurant.name}}
+                    <p>{{restaurant.title}}</p>
+                    <p ng-show="{{restaurant.closed}}">Closed</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+<!--     <button 
+        class="button button-full button-custom button-footer" 
+        ng-click="goToCart()" 
+        ng-disabled="cart.getTotalCount() < 1" >
+        <i class="icon ion-bag"></i>
+        <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+    </button> -->
+</ion-view>

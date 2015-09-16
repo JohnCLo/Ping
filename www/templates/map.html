@@ -1,0 +1,31 @@
+<ion-view title="Explore"> 
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+    <ion-content class="has-header" scroll="false" data-tap-disabled="true">
+    
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+
+        <mapbox map-id="licyeus.i9pkgkg8"
+              lat="42.378989"
+              lng="-71.123696"
+              zoom="17"
+              on-reposition="mapMovedCallback"
+              on-zoom="mapZoomedCallback">
+          
+        <marker ng-repeat="market in farmerMarkets"
+                lat="{{market.location.geo[0]}}"
+                lng="{{market.location.geo[1]}}"
+                color="teal"
+                size ="large"
+                icon="library">
+          <h1>{{market.title}}</h1>
+          <p>Published: {{market.createdAt}}</p>
+          <button class="button button-calm button-full" ng-click="getStory('{{market._id}}')">Read</button>
+        </marker>
+        </mapbox>
+    </ion-content>
+</ion-view>

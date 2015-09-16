@@ -1,0 +1,78 @@
+<div class="modal">
+  <ion-header-bar class="bar-assertive">
+      <h1 class="title">CHECKOUT</h1>
+      <button class="button button-clear button-primary" ng-click="closeCheckout()">Cancel</button>
+  </ion-header-bar>
+  
+  <ion-content ng-class="{'has-fiy': showFIY}">
+    <form novalidate name="checkoutForm" stripe-form="stripeCallback" ng-submit="onSubmit()" data-abide>
+      <div class="list">
+
+        <label class="item item-input item-select">
+          <span class="input-label">Delivery Location</span>
+          <div class="row" style="padding: 10px">
+            <div class="col col-offset-10 col-90">
+            <select name="location" ng-model="paymentData.location" required>
+              <option value="">Select a Location</option>
+              <option value="quad">Quad</option>
+            </select>
+            </div>
+          </div>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="checkoutForm.location.$error.required">
+          <span class="input-label"></span>
+          <small class="error">Please select your location</small>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Phone Number</span>
+            <input type="tel" ng-model="paymentData.phoneNumber" placeholder="XXX-XXX-XXXX" name="phone" ng-pattern="/(\d{3}-\d{3}-\d{4}|\d{10})/g" required/>
+          </span>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="checkoutForm.phone.$error.required || checkoutForm.phone.$invalid">
+          <span class="input-label"></span>
+          <small class="error">Please enter your phone number</small>
+        </label>
+
+        <div class="item item-energized center">
+          <small>Information will be saved in Settings!</small>
+        </div>
+
+        <label class="item item-input">
+          <span class="input-label">Card Number</span>
+            <input type="tel" ng-model="number" placeholder="XXXX-XXXX-XXXX-XXXX" payments-format="card" payments-validate="card" name="number" required/>
+          </span>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="!checkoutForm.number.$error.required && checkoutForm.number.$invalid">
+          <span class="input-label"></span>
+            <small class="error">Please enter a valid card number</small>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Expiration</span>
+            <input type="tel" ng-model="expiry" placeholder="MM / YYYY" payments-format="expiry" payments-validate="expiry" name="expiry" required/>
+          </span>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="!checkoutForm.expiry.$error.required && checkoutForm.expiry.$invalid">
+          <span class="input-label"></span>
+          <!-- <div class="large-6 columns" ng-class="{error: checkoutForm.number.$invalid}"> -->
+            <small class="error">Please enter a valid expiration date</small>
+          <!-- </div> -->
+        </label>
+        <label class="item item-input">
+          <span class="input-label">CVC</span>
+            <input type="tel" ng-model="cvc" placeholder="CVC" payments-format="cvc" payments-validate="cvc" name="cvc" size="3" required/>
+          </span>
+        </label>
+        <label class="item item-input error item-assertive" ng-show="!checkoutForm.cvc.$error.required && checkoutForm.cvc.$invalid">
+          <span class="input-label"></span>
+          <!-- <div class="large-6 columns" ng-class="{error: checkoutForm.number.$invalid}"> -->
+            <small>Please enter a valid CVC</small>
+          <!-- </div> -->
+        </label>
+
+      <label class="item">
+        <button class="button button-block button-assertive" type="submit" ng-disabled="checkoutForm.$invalid">Pay {{cart.getTotalPriceWithDelivery() | currency }}</button> 
+      </label>
+    </form>
+  </ion-content>
+</div>

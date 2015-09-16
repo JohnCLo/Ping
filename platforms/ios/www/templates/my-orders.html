@@ -1,0 +1,36 @@
+<ion-view title="My Orders"> 
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+    <ion-content class="has-header">
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+        <div ng-hide="orders.length" style="padding-top:20%;">
+            <div class="row">
+              <div class="col col-50 col-offset-25 center">
+                <p style="color:#656565; padding-bottom:10px">Looking pretty empty around here.</p>
+                <button class="button button-block button-assertive" ng-click="goToRestaurant()">Your First Order</button> 
+              </div>
+            </div>
+        </div>
+        <ion-list>
+            <ion-item type="item-text-wrap" 
+                class="item item-thumbnail-left" 
+                ng-repeat="order in orders track by $index">
+                <img ng-src="pics/{{order.pic}}"
+                fallback-src="pics/pronto.jpg" />
+                <small>Total: {{order.total | currency }}<br/>
+                {{order.createdAt | dateToLocale }}<br/>
+                <!-- Processed, Delivered, Onroute, Ordered -->
+                Status: <span ng-class="order.state == 'delivered' ? 'order-status-delivered' : 
+                (order.state == 'onroute' ? 'order-status-onroute' : 
+                (order.state == 'processed' ? 'order-status-processed' : '')
+                )">{{order.state | titlecase}}</span>
+                </small>
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+</ion-view>

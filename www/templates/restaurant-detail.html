@@ -1,0 +1,24 @@
+<ion-view title="{{restaurant.name}}">
+    <ion-content class="has-header">
+        <ion-list>           
+            <!-- <p>{{restaurant.Sunday}}</p> -->
+            <ion-item 
+            ng-repeat="item in restaurant.items" class="item item-thumbnail-left" 
+            ng-click="addItemWithLimit(item._id,item.name,item.price);">
+                <img ng-src="pics/{{item.pic }}"
+                fallback-src="pics/restaurantFillerIcon.png"/>
+                {{item.name}}
+                <p>{{item.description}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+    <button 
+        class="button button-full button-custom button-footer" 
+        ng-click="goToCart()" 
+        ng-disabled="cart.getTotalCount() < 1" >
+        <i class="icon ion-bag"></i>
+        <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+    </button>
+
+</ion-view>
